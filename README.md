@@ -1,5 +1,5 @@
 # MyDiscordBot
 install 
+npm install @discordjs/opus
 npm install ffmpeg-static
-npm install ffmpeg-static
-npm install ytdl-core opusscript
+npm install ytdl-core
