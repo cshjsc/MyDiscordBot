@@ -18,6 +18,8 @@
     "discord.js": "^12.1.1",
     "dotenv": "^8.2.0",
     "ffmpeg-static": "^4.0.1",
+    "google-auth-library": "^6.0.0",
+    "googleapis": "^48.0.0",
     "opusscript": "0.0.7",
     "ytdl-core": "^2.0.1"
   },
