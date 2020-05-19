@@ -18,7 +18,6 @@ const commands = {
 };
 
 module.exports = async (msg) => {
-    console.log(msg);
     if (channels_ids.includes(msg.channel.id)) {
         // /s means search for a white space btu /s+ means search for any amount of whitespaces
         //    const args = msg.content.split(/s+/);

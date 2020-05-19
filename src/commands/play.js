@@ -108,7 +108,7 @@ async function searchByKeyword(server, msg , plainContent) {
                 output += outputIndex+") "+item.snippet.title+"\n";
             }
         }
-        console.log(server.search[0]);
+        // console.log(server.search[0]);
         msg.reply(output);
     });
 
