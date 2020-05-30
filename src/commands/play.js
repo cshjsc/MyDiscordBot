@@ -4,15 +4,12 @@ const {google} = require('googleapis');
 require("dotenv").config();
 module.exports = async (msg, args, plainContent) => {
     const voiceChannel = msg.member.voice.channel;
-    console.log(servers);
     if (voiceChannel) {
         if (!servers[msg.guild.id]) {
-            console.log('not in server');
             servers[msg.guild.id] = {
                 queue: [],
                 search: []
             };
-            console.log(servers);
         }
         const server = servers[msg.guild.id];
         if (validURL(args[0])) {
@@ -28,15 +25,14 @@ module.exports = async (msg, args, plainContent) => {
                     server.queue.push(url);
                 }
             }
+            //just play a song if no arguments
         } else if (args.length === 0) {
-
             server.queue.push("https://www.youtube.com/watch?v=6xUnSVTh8fI");
         } else {
             await searchByKeyword(server, msg,plainContent);
             return;
         }
         if (!servers[msg.guild.id].connection) {
-            console.log("no connection");
             voiceChannel.join().then(connection => {
                 servers[msg.guild.id].connection = connection;
                 playQueue(connection, msg);
@@ -48,19 +44,20 @@ module.exports = async (msg, args, plainContent) => {
 };
 const playQueue = function (connection, msg) {
     const server = servers[msg.guild.id];
-    console.log("playing"+server.queue[0]);
-    server.dispatcher = connection.play(YTDL(server.queue[0]), {filter: "audioonly"});
+    const currentUrl = server.queue[0];
+    server.dispatcher = connection.play(YTDL(currentUrl, {filter: "audioonly"}));
     server.queue.shift();
-    console.log(server.queue);
     server.dispatcher.on("finish", finish => {
         if (server.queue[0]) {
-            console.log("playing queue");
             playQueue(connection, msg);
         } else {
-            console.log("deleting queue and server");
             delete servers[msg.guild.id];
             connection.disconnect();
         }
+    });
+    server.dispatcher.on("error",onerror=>{
+        console.log("Error:"+onerror.toString());
+        msg.reply("error"+onerror.toString());
     })
 };
 
@@ -89,7 +86,6 @@ async function searchByKeyword(server, msg , plainContent) {
         let output = "";
         if (err) {
             console.log('The API returned an error: ' + err);
-            output = "The API returned an error";
             return;
         }
         if (response.data.items.length === 0) {
@@ -97,9 +93,7 @@ async function searchByKeyword(server, msg , plainContent) {
         } else {
             server.search = [];
             for (let i in response.data.items) {
-                console.log(i);
                 const item = response.data.items[i];
-                console.log('[%s] Title: %s', item.id.videoId, item.snippet.title);
                 server.search.push({
                     "url": 'https://www.youtube.com/watch?v='+item.id.videoId,
                     "name": item.snippet.title
