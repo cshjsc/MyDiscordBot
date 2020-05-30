@@ -81,9 +81,10 @@ async function searchByKeyword(server, msg , plainContent) {
         part: 'id,snippet',
         key: process.env.YOUTUBE_API_KEY,
         q: plainContent,
+        type: "video",
         maxResults: 5
     }, function (err, response) {
-        let output = "";
+        let output = "\n";
         if (err) {
             console.log('The API returned an error: ' + err);
             return;
@@ -102,7 +103,6 @@ async function searchByKeyword(server, msg , plainContent) {
                 output += outputIndex+") "+item.snippet.title+"\n";
             }
         }
-        // console.log(server.search[0]);
         msg.reply(output);
     });
 
