@@ -21,9 +21,11 @@ const commands = {
 module.exports = async (msg) => {
     if (channels_ids.includes(msg.channel.id)) {
         // /s means search for a white space btu /s+ means search for any amount of whitespaces
-        const args = msg.content.split(/s+/);
+        const args = msg.content.split(/\s+/g);
         if (args.length === 0 || args[0].charAt(0) !== "!") return;
         const command = args.shift().substring(1);
+        console.log("args"+args.toString());
+        console.log("msg"+msg.content.toString());
         if (Object.keys(commands).includes(command)) {
             const plainContent = args.join(" ");
             commands[command](msg, args, plainContent);
