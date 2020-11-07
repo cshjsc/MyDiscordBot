@@ -1,29 +1,31 @@
 {
-  "name": "my-discord-bot",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node src/index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git clone https://github.com/cshjsc/MyDiscordBot.git"
-  },
-  "keywords": [],
-  "author": "Juan Amaya",
-  "license": "ISC",
-  "dependencies": {
-    "@discordjs/opus": "^0.3.2",
-    "discord.js": "^12.3.1",
-    "dotenv": "^8.2.0",
-    "ffmpeg-static": "^4.2.7",
-    "google-auth-library": "^6.1.0",
-    "googleapis": "^57.0.0",
-    "opusscript": "0.0.7",
-    "ytdl-core": "^3.3.0"
-  },
-  "devDependencies": {
-    "eslint": "^7.10.0"
-  }
+	"name": "my-discord-bot",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "node src/index.js",
+		"dev": "nodemon src/index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git clone https://github.com/cshjsc/MyDiscordBot.git"
+	},
+	"keywords": [],
+	"author": "Juan Amaya",
+	"license": "ISC",
+	"dependencies": {
+		"@discordjs/opus": "^0.3.3",
+		"discord.js": "^12.4.1",
+		"dotenv": "^8.2.0",
+		"ffmpeg-static": "^4.2.7",
+		"google-auth-library": "^6.1.3",
+		"googleapis": "^64.0.0",
+		"opusscript": "0.0.7",
+		"ytdl-core": "^4.0.3"
+	},
+	"devDependencies": {
+		"eslint": "^7.13.0",
+		"nodemon": "^2.0.6"
+	}
 }
