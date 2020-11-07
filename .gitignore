@@ -2,3 +2,4 @@
 .idea
 client_secret.json
 .credentials
+node_modules/
